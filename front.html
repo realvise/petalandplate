@@ -1,0 +1,290 @@
+<div class="site">
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <div class="logo">Pastel & Plate</div>
+
+    <div class="menu">
+      <a href="#home">Home</a>
+      <a href="#categories">Categories</a>
+      <a href="#trending">Trending</a>
+      <a href="#about">About</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home" class="hero animate-section">
+    <div class="hero-text">
+      <h1>
+        STRAWBERRY<br>
+        <span>DELIGHT</span>
+      </h1>
+
+      <p class="tagline">
+        Today’s most loved treat — sweet, soft, and trending everywhere.
+      </p>
+
+      <p class="desc">
+        We feature the internet’s most popular food picks with simple recipes
+        so you can recreate them at home.
+      </p>
+
+      <a href="#categories" class="btn">See More Food</a>
+    </div>
+
+    <div class="hero-image">
+      <img src="https://drive.google.com/uc?export=view&id=1QuZ4pimJiO3JJhtt_q-AOdeptEV9bqQz" alt="Food">
+    </div>
+  </section>
+
+  <!-- CATEGORIES SECTION -->
+  <section id="categories" class="iframe-section animate-section">
+    <h2>Categories</h2>
+
+    <div class="categories-menu">
+      <a href="#" onclick="loadCategory('beverages')">Beverages / Drinks</a>
+      <a href="#" onclick="loadCategory('desserts')">Desserts & Sweet Treats</a>
+      <a href="#" onclick="loadCategory('sandwiches')">Sandwiches, Toasts & Wraps</a>
+      <a href="#" onclick="loadCategory('snacks')">Savory Snacks / Street Food</a>
+      <a href="#" onclick="loadCategory('main')">Main Dishes / Meals</a>
+      <a href="#" onclick="loadCategory('pastries')">Pastries / Baked Goods</a>
+    </div>
+  </section>
+
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+function loadCategory(category) {
+  const iframe = document.getElementById('category-iframe');
+
+  // Replace these URLs with the actual Google Sites page URL for each category
+  if (category === 'beverages') {
+    iframe.src = "https://sites.google.com/view/petalplate/beverages";
+  } else if (category === 'desserts') {
+    iframe.src = "https://sites.google.com/view/petalplate/desserts";
+  } else if (category === 'sandwiches') {
+    iframe.src = "https://sites.google.com/view/petalplate/sandwiches";
+  } else if (category === 'snacks') {
+    iframe.src = "https://sites.google.com/view/petalplate/snacks";
+  } else if (category === 'main') {
+    iframe.src = "https://sites.google.com/view/petalplate/main-dishes";
+  } else if (category === 'pastries') {
+    iframe.src = "https://sites.google.com/view/petalplate/pastries";
+  }
+}
+
+// Smooth animation for sections when scrolling
+const sections = document.querySelectorAll('.animate-section');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, {
+  threshold: 0.1
+});
+
+sections.forEach(section => {
+  observer.observe(section);
+});
+</script>
+
+<!-- STYLES -->
+<style>
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* SMOOTH SCROLL */
+html {
+  scroll-behavior: smooth;
+}
+
+/* SITE */
+.site {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffe6ef, #ffd1e3);
+  font-family: Arial, sans-serif;
+  padding: 30px 6vw;
+}
+
+/* NAV */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.menu a {
+  margin: 0 16px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.menu a:hover {
+  border-bottom: 2px solid #d36c9f;
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 80px;
+  gap: 40px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+/* TEXT */
+.hero-text {
+  max-width: 520px;
+}
+
+.hero-text h1 {
+  font-size: 64px;
+  line-height: 1;
+  color: #222;
+}
+
+.hero-text h1 span {
+  font-weight: 300;
+  font-style: italic;
+}
+
+.tagline {
+  font-size: 18px;
+  margin: 20px 0 10px;
+  color: #b84c82;
+  font-weight: bold;
+}
+
+.desc {
+  font-size: 14px;
+  color: #555;
+  max-width: 420px;
+}
+
+/* BUTTON */
+.btn {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 14px 36px;
+  background: #d36c9f;
+  color: #fff;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* IMAGE */
+.hero-image img {
+  max-height: 520px;
+  width: auto;
+  border-radius: 20px;
+}
+
+/* IFRAME SECTION */
+.iframe-section {
+  margin-top: 80px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.iframe-section h2 {
+  font-size: 36px;
+  color: #d36c9f;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* CATEGORIES MENU */
+.categories-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.categories-menu a {
+  padding: 10px 18px;
+  background: #ffd1e3;
+  border-radius: 20px;
+  text-decoration: none;
+  color: #d36c9f;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.categories-menu a:hover {
+  background: #d36c9f;
+  color: #fff;
+}
+
+/* GENERAL SECTIONS */
+.section {
+  margin-top: 80px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.section h2 {
+  font-size: 36px;
+  color: #d36c9f;
+  margin-bottom: 20px;
+}
+
+.section p {
+  font-size: 16px;
+  color: #555;
+}
+
+/* VISIBLE ANIMATION */
+.visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text h1 {
+    font-size: 48px;
+  }
+
+  .hero-image img {
+    max-height: 420px;
+  }
+
+  .menu {
+    margin-top: 10px;
+  }
+}
+</style>
