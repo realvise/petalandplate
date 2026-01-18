@@ -36,6 +36,7 @@ body {
   font-weight: bold;
   font-size: 20px;
   z-index: 1001;
+  color: #ffe6ef;
 }
 
 /* NAV */
@@ -115,6 +116,22 @@ body {
   justify-content: space-between;
   padding: 120px 8vw 60px;
   gap: 40px;
+
+  /* Background image */
+  background: url('Background.png') no-repeat center center;
+  background-size: cover; /* ensures it fills the hero area */
+  background-attachment: scroll; /* change to fixed if you want parallax */
+  position: relative;
+  z-index: 1;
+}
+
+/* Optional: overlay to make text stand out */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255, 255, 255, 0.35); /* soft white overlay for readability */
+  z-index: -1; /* behind hero content */
 }
 
 .hero-text {
@@ -298,6 +315,20 @@ body {
     min-width: 180px;
   }
 }
+#about p, #contact p {
+  color: #555;
+  font-size: 18px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+footer {
+  background: rgba(255, 210, 227, 0.4);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
 </style>
 </head>
 
@@ -327,7 +358,6 @@ body {
       <img src="TrendingFood.png" alt="Food">
     </div>
   </section>
-
   <!-- CATEGORIES -->
   <section id="categories" class="section">
     <div class="section-frame">
@@ -349,25 +379,51 @@ body {
         <div class="carousel-frame">
           <div class="carousel">
             <div class="carousel-track">
-              <div class="food-card"><img src="palceholder.png"><p>Basque Cheesecake</p></div>
-              <div class="food-card"><img src="palceholder.png"><p>Korean Corn Dog</p></div>
-              <div class="food-card"><img src="palceholder.png"><p>Halo-Halo</p></div>
-              <div class="food-card"><img src="palceholder.png"><p>Spam Musubi</p></div>
-              <div class="food-card"><img src="palceholder.png"><p>Banana Pancakes</p></div>
-              <div class="food-card"><img src="palceholder.png"><p>Yakult Float</p></div>
-              <div class="food-card"><img src="palceholder.png"><p>Cheese Pull</p></div>
-              <div class="food-card"><img src="palceholder.png"><p>Mug Cake</p></div>
-              <div class="food-card"><img src="palceholder.png"><p>Fruit Tea</p></div>
-              <div class="food-card"><img src="palceholder.png"><p>Garlic Shrimp</p></div>
+              <div class="food-card"><img src="food1.jpg"><p>Basque Cheesecake</p></div>
+              <div class="food-card"><img src="food2.jpg"><p>Korean Corn Dog</p></div>
+              <div class="food-card"><img src="food3.jpg"><p>Halo-Halo</p></div>
+              <div class="food-card"><img src="food4.jpg"><p>Spam Musubi</p></div>
+              <div class="food-card"><img src="food5.jpg"><p>Banana Pancakes</p></div>
+              <div class="food-card"><img src="food6.jpg"><p>Yakult Float</p></div>
+              <div class="food-card"><img src="food7.jpg"><p>Cheese Pull</p></div>
+              <div class="food-card"><img src="food8.jpg"><p>Mug Cake</p></div>
+              <div class="food-card"><img src="food9.jpg"><p>Fruit Tea</p></div>
+              <div class="food-card"><img src="food10.jpg"><p>Garlic Shrimp</p></div>
             </div>
           </div>
         </div>
 
       </div>
-
     </div>
   </section>
+  <section id="about" class="section">
+  <div class="section-frame">
+    <h2>About Us</h2>
+    <div class="divider"></div>
+    <p>
+      Welcome to <strong>Pastel & Plate</strong>! 🎀<br>
+      Our website is dedicated to discovering the most trending foods and sharing their recipes with you. 
+      Whether it's a sweet dessert, a savory snack, or a popular main dish, we bring you the flavors everyone is talking about. 
+      Explore, cook, and enjoy the foods that are loved by many!
+    </p>
+  </div>
+</section>
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="section-frame">
+    <h2>Contact Us</h2>
+    <div class="divider"></div>
+    <p>
+      Have questions or want to suggest a trending food? Reach out to us at <strong>pastelandplate@example.com</strong>.
+      <br>Or send a message via our school project form (if required).
+    </p>
+  </div>
+</section>
 
+<!-- FOOTER -->
+<footer class="section" style="text-align:center; padding:40px 8vw; color:#b84c82; font-weight:bold;">
+  © 2026 Pastel & Plate. All rights reserved.
+</footer>
 </div>
 
 <script>
