@@ -238,6 +238,7 @@ body {
   font-weight: bold;
   color: #d36c9f;
   box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
 }
 
 .categories-menu a:hover {
@@ -257,7 +258,7 @@ body {
   text-align: center;
 }
 
-/* 🔥 NEW CAROUSEL FRAME */
+/*NEW CAROUSEL FRAME */
 .carousel-frame {
   margin-top: 40px;
   padding: 30px 20px;
@@ -277,7 +278,12 @@ body {
 .carousel-track {
   display: flex;
   gap: 22px;
-  animation: slide 40s linear infinite;
+  width: max-content;
+  animation: slide 25s linear infinite;
+  color: #b84c82;
+  font-weight: bold;
+  text-align: center;
+
 }
 
 .food-card {
@@ -297,23 +303,34 @@ body {
   border-radius: 22px;
 }
 
-.food-card p {
-  margin-top: 14px;
-  font-weight: bold;
-  color: #b84c82;
-  text-align: center;
+.food-card {
+  min-width: 220px;
+  width: 220px;          /* lock width */
+  flex-shrink: 0;        /* PREVENT resizing */
+  background: rgba(255,255,255,0.45);
+  backdrop-filter: blur(12px);
+  border-radius: 28px;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.12);
 }
 
 /* LOOP */
 @keyframes slide {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* MOBILE */
 @media (max-width: 768px) {
   .food-card {
     min-width: 180px;
+    width: 180px;
+    flex-shrink: 0;
   }
 }
 #about p, #contact p {
@@ -335,6 +352,30 @@ footer {
   color: #ffa6e7;
   font-style: italic;
 }
+
+.browsemore {
+  margin-top: 20px;
+  padding: 18px 40px;
+  background: #d36c9f;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 18px;
+  box-shadow: 0 8px 24px rgba(211,108,159,0.4);
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 0.3s ease;
+
+}
+
+.browsemore:hover {
+  background: #b84c82;
+}
+
+
 </style>
 </head>
 
@@ -399,7 +440,7 @@ footer {
             </div>
           </div>
         </div>
-
+        <button class="browsemore" onclick="window.open('https://sites.google.com/view/petalplate/categories', '_blank')">Browse Food</button>
       </div>
     </div>
   </section>
