@@ -153,7 +153,13 @@ body.pastries { background: #fff2d6; }
     box-shadow: 0 25px 50px rgba(0,0,0,0.12);
 }
 
-.food-card img { width: 140px; height: 140px; object-fit: contain; margin-bottom: 20px; }
+.food-card img {
+    width: 140px;              /* fixed square size for desktop */
+    height: 140px;             /* same as width */
+    object-fit: cover;         /* fills the square without distortion */
+    border-radius: 22px;       /* rounded corners */
+    margin-bottom: 20px;
+}
 .food-card h3 { font-size: 18px; color: #333; font-weight: 600; text-align: center; padding: 0 10px; }
 
 /* Categories */
@@ -170,7 +176,10 @@ body.pastries { background: #fff2d6; }
 /* Mobile Adjustments */
 @media (max-width: 600px) {
     .food-card { flex: 0 0 180px; height: 260px; margin: 0 20px; }
-    .food-card img { width: 110px; height: 110px; }
+     .food-card img {
+        width: 110px;
+        height: 110px;
+    }
     .food-card h3 { font-size: 16px; }
     .view-window { height: 380px; }
 }
@@ -206,7 +215,7 @@ body.pastries { background: #fff2d6; }
 <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
 <nav class="nav" id="nav">
-    <a href="https://sites.google.com/view/petalplate/homepage">Home</a>
+    <a href="#home">Home</a>
     <a href="#categories">Categories</a>
     <a href="#contact">Contact</a>
     <a href="#about">About</a>
@@ -233,49 +242,49 @@ body.pastries { background: #fff2d6; }
 <script>
 const data = {
   beverages: [
-    {name:'Blended Iced Tea', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/blended-iced-tea'},
-    {name:'Shake', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/shake'},
-    {name:'Fruit Tea', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/fruit-tea'},
-    {name:'Yakult Float', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/yakult-float'}
+    {name:'Blended Iced Tea', img:'blendedicedtea.jpg', recipe:'https://example.com/blended-iced-tea'},
+    {name:'Variaty Shake', img:'shake.jpg', recipe:'https://example.com/shake'},
+    {name:'Variaty Fruit Tea', img:'fruittea.jpg', recipe:'https://example.com/fruit-tea'},
+    {name:'Yakult Float', img:'yakultfloat.jpg', recipe:'https://example.com/yakult-float'}
   ],
   desserts: [
-    {name:'Ice Cream', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/ice-cream'},
-    {name:'Cookies & Cream', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/cookies-cream'},
-    {name:'Chocolate', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/chocolate'},
-    {name:'Halo-Halo', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/halo-halo'},
-    {name:'Basque Burnt Cheesecake', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/basque-cheesecake'},
-    {name:'Mug Cake', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/mug-cake'},
-    {name:'Banana Pancakes', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/banana-pancakes'},
-    {name:'Banana Bread', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/banana-bread'},
-    {name:'Cinnamon Sugar Toast', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/cinnamon-toast'},
-    {name:'No-Bake Oreo Truffles', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/oreo-truffles'}
+    {name:'Vanilla Ice Cream', img:'icecream.jpg', recipe:'https://example.com/ice-cream'},
+    {name:'Cookies & Cream', img:'cookiesandcream.jpeg', recipe:'https://example.com/cookies-cream'},
+    {name:'Homemade Chocolate', img:'chocolate.jpg', recipe:'https://example.com/chocolate'},
+    {name:'Halo-Halo', img:'halohalo.jpeg', recipe:'https://example.com/halo-halo'},
+    {name:'Basque Burnt Cheesecake', img:'basqueburnt.jpg', recipe:'https://example.com/basque-cheesecake'},
+    {name:'Mug Cake', img:'mugcake.jpg', recipe:'https://example.com/mug-cake'},
+    {name:'Banana Pancakes', img:'bananapancake.jpg', recipe:'https://example.com/banana-pancakes'},
+    {name:'Banana Bread', img:'bananabread.jpg', recipe:'https://example.com/banana-bread'},
+    {name:'Cinnamon Sugar Toast', img:'cinammonsugartoast.jpg', recipe:'https://example.com/cinnamon-toast'},
+    {name:'No-Bake Oreo Truffles', img:'oreatruffles.jpg', recipe:'https://example.com/oreo-truffles'}
   ],
   sandwiches: [
-    {name:'Cheese Pull Sandwich', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/cheese-pull'},
-    {name:'Chicken Wrap', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/chicken-wrap'},
-    {name:'Egg & Cheese Toast', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/egg-toast'},
-    {name:'Garlic Bread Pizza', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/garlic-pizza'},
-    {name:'Tuna Melt Sandwich', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/tuna-melt'}
+    {name:'Cheese Pull Sandwich', img:'cheesepull.jpg', recipe:'https://example.com/cheese-pull'},
+    {name:'Chicken Wrap', img:'chickenwrap.jpg', recipe:'https://example.com/chicken-wrap'},
+    {name:'Egg & Cheese Toast', img:'eggcheesetoast.jpg', recipe:'https://example.com/egg-toast'},
+    {name:'Garlic Bread Pizza', img:'garlicpizza.jpeg', recipe:'https://example.com/garlic-pizza'},
+    {name:'Tuna Melt Sandwich', img:'tunamelt.jpg', recipe:'https://example.com/tuna-melt'}
   ],
   snacks: [
-    {name:'Potato Pillow', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/potato-pillow'},
-    {name:'Korean Corn Dogs', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/korean-corn-dogs'},
-    {name:'Cheesy Mashed Potato Balls', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/mashed-potato-balls'},
-    {name:'Spam Musubi', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/spam-musubi'},
-    {name:'Onigiri (Rice Balls)', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/onigiri'}
+    {name:'Potato Pillow', img:'potatopillow.jpg', recipe:'https://example.com/potato-pillow'},
+    {name:'Korean Corn Dogs', img:'koreancorndog.jpg', recipe:'https://example.com/korean-corn-dogs'},
+    {name:'Cheesy Mashed Potato Balls', img:'smashedpotato.jpg', recipe:'https://example.com/mashed-potato-balls'},
+    {name:'Spam Musubi', img:'spammusubi.jpg', recipe:'https://example.com/spam-musubi'},
+    {name:'Onigiri (Rice Balls)', img:'onigiri.jpg', recipe:'https://example.com/onigiri'}
   ],
   meals: [
-    {name:'Adobo', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/adobo'},
-    {name:'Chicken Curry', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/chicken-curry'},
-    {name:'Pizza', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/pizza'},
-    {name:'Fried Rice', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/fried-rice'},
-    {name:'Garlic Butter Shrimp', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/garlic-shrimp'}
+    {name:'Chicken Adobo', img:'adobo.jpg', recipe:'https://example.com/adobo'},
+    {name:'Chicken Curry', img:'chickencurry.jpg', recipe:'https://example.com/chicken-curry'},
+    {name:'Pepperoni Pizza', img:'pizza.jpg', recipe:'https://example.com/pizza'},
+    {name:'Fried Rice', img:'friedrice.jpg', recipe:'https://example.com/fried-rice'},
+    {name:'Garlic Butter Shrimp', img:'garlicbuttershrimp.jpg', recipe:'https://example.com/garlic-shrimp'}
   ],
   pastries: [
-    {name:'Buko Pie', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/buko-pie'},
-    {name:'Egg Pie', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/egg-pie'},
-    {name:'Empanada', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/empanada'},
-    {name:'Ensaymada', img:'https://via.placeholder.com/300x300', recipe:'https://example.com/ensaymada'}
+    {name:'Buko Pie', img:'bukopie.jpg', recipe:'https://example.com/buko-pie'},
+    {name:'Egg Pie', img:'eggpie.jpg', recipe:'https://example.com/egg-pie'},
+    {name:'Ilocos Empanada', img:'ilocosempanada.jpg', recipe:'https://example.com/empanada'},
+    {name:'Ensaymada', img:'ensaymada.jpg', recipe:'https://example.com/ensaymada'}
   ]
 };
 
