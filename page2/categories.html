@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Browse Food | TrendBites</title>
+
+<style>
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.6s ease;
+}
+
+/* ===== CATEGORY BACKGROUNDS ===== */
+body.beverages { background: linear-gradient(135deg, #e8f7ff, #f6fcff); }
+body.desserts { background: linear-gradient(135deg, #ffd6e8, #ffeef6); }
+body.sandwiches { background: linear-gradient(135deg, #fff0d9, #fff7eb); }
+body.snacks { background: linear-gradient(135deg, #e9fff2, #f6fffa); }
+body.meals { background: linear-gradient(135deg, #e6ddff, #f4f0ff); }
+body.pastries { background: linear-gradient(135deg, #fff2d6, #fff8e6); }
+
+body.drinks {
+  background: linear-gradient(135deg, #ffe5c8, #fff3e4);
+}
+
+body.meals {
+  background: linear-gradient(135deg, #e6ddff, #f4f0ff);
+}
+
+/* ===== CATEGORY BUTTONS ===== */
+.categories {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.category-btn {
+  padding: 10px 22px;
+  border-radius: 30px;
+  border: none;
+  background: rgba(255,255,255,0.6);
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.category-btn.active {
+  background: #ff9ecb;
+  color: white;
+  box-shadow: 0 5px 15px rgba(255,158,203,0.4);
+}
+
+/* ===== CAROUSEL ===== */
+.carousel-wrapper {
+  position: relative;
+  width: 90%;
+  max-width: 900px;
+  height: 320px;
+  perspective: 1000px;
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.food-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 220px;
+  height: 260px;
+  background: white;
+  border-radius: 25px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.6s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.food-card img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.food-card h3 {
+  margin-top: 12px;
+  font-size: 16px;
+}
+
+/* STATES */
+.food-card.center {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  z-index: 3;
+  box-shadow: 0 14px 32px rgba(0,0,0,0.18);
+  animation: float 4s ease-in-out infinite;
+}
+
+.food-card.left {
+  transform: translate(-150%, -50%) scale(0.8) rotateY(25deg);
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.food-card.right {
+  transform: translate(50%, -50%) scale(0.8) rotateY(-25deg);
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.food-card.hidden {
+  transform: translate(-50%, -50%) scale(0.6);
+  opacity: 0;
+  z-index: 1;
+}
+
+/* ===== CONTROLS ===== */
+.controls {
+  margin-top: 30px;
+  display: flex;
+  gap: 30px;
+}
+
+.controls button {
+  background: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+@keyframes float {
+  0% { transform: translate(-50%, -50%) scale(1) translateY(0); }
+  50% { transform: translate(-50%, -50%) scale(1) translateY(-6px); }
+  100% { transform: translate(-50%, -50%) scale(1) translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .food-card { width: 180px; height: 230px; }
+}
+</style>
+</head>
+
+<body class="desserts">
+
+<!-- ===== CATEGORIES ===== -->
+<div class="categories">
+  <button class="category-btn active" data-category="beverages">Beverages</button>
+  <button class="category-btn" data-category="desserts">Desserts & Sweet Treats</button>
+  <button class="category-btn" data-category="sandwiches">Sandwiches & Wraps</button>
+  <button class="category-btn" data-category="snacks">Savory Snacks</button>
+  <button class="category-btn" data-category="meals">Main Dishes</button>
+  <button class="category-btn" data-category="pastries">Pastries</button>
+</div>
+
+<!-- ===== CAROUSEL ===== -->
+<div class="carousel-wrapper">
+  <div class="carousel" id="carousel">
+    <!-- Cards injected by JS -->
+  </div>
+</div>
+
+<!-- ===== CONTROLS ===== -->
+<div class="controls">
+  <button id="prev">‹</button>
+  <button id="next">›</button>
+</div>
+
+<script>
+const data = {
+  beverages: [
+    { name: 'Blended Iced Tea', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Shake', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Fruit Tea', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Yakult Float', img: 'https://via.placeholder.com/300x300' }
+  ],
+  desserts: [
+    { name: 'Ice Cream', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Cookies & Cream', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Chocolate', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Halo-Halo', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Basque Burnt Cheesecake', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Mug Cake', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Banana Pancakes', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Banana Bread', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Cinnamon Sugar Toast', img: 'https://via.placeholder.com/300x300' },
+    { name: 'No-Bake Oreo Truffles', img: 'https://via.placeholder.com/300x300' }
+  ],
+  sandwiches: [
+    { name: 'Cheese Pull Sandwich', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Chicken Wrap', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Egg & Cheese Toast', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Garlic Bread Pizza', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Tuna Melt Sandwich', img: 'https://via.placeholder.com/300x300' }
+  ],
+  snacks: [
+    { name: 'Potato Pillow', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Korean Corn Dogs', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Cheesy Mashed Potato Balls', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Spam Musubi', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Onigiri (Rice Balls)', img: 'https://via.placeholder.com/300x300' }
+  ],
+  meals: [
+    { name: 'Adobo', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Chicken Curry', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Pizza', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Fried Rice', img: 'https://via.placeholder.com/300x300' },
+    { name: 'Garlic Butter Shrimp', img: 'https://via.placeholder.com/300x300' }
+  ],
+  pastries: [
+    { name: 'Buko Pie', img: 'https://via.placeholder.com/300x300' }
+  ]
+};
+
+let currentCategory = 'beverages';
+let currentIndex = 0;
+const carousel = document.getElementById('carousel');
+
+function renderCarousel() {
+  carousel.innerHTML = '';
+  const items = data[currentCategory];
+
+  items.forEach((item, index) => {
+    const card = document.createElement('div');
+    card.classList.add('food-card');
+
+    if (index === currentIndex) card.classList.add('center');
+    else if (index === (currentIndex - 1 + items.length) % items.length) card.classList.add('left');
+    else if (index === (currentIndex + 1) % items.length) card.classList.add('right');
+    else card.classList.add('hidden');
+
+    card.innerHTML = `
+      <img src="${item.img}" alt="${item.name}">
+      <h3>${item.name}</h3>
+    `;
+
+    carousel.appendChild(card);
+  });
+}
+
+renderCarousel();
+
+// CONTROLS
+document.getElementById('next').onclick = () => {
+  const items = data[currentCategory];
+  currentIndex = (currentIndex + 1) % items.length;
+  renderCarousel();
+};
+
+document.getElementById('prev').onclick = () => {
+  const items = data[currentCategory];
+  currentIndex = (currentIndex - 1 + items.length) % items.length;
+  renderCarousel();
+};
+
+// CATEGORY SWITCH
+document.querySelectorAll('.category-btn').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    currentCategory = btn.dataset.category;
+    currentIndex = 0;
+    document.body.className = currentCategory;
+    renderCarousel();
+  };
+});
+</script>
+
+</body>
+</html>
